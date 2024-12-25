@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/RL projects/CSES---Problems/Introductory Problems/Missing Number",
-      "program": "c:/Users/NICOLAS/Desktop/2024/RL projects/CSES---Problems/Introductory Problems/Missing Number/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/RL projects/CSES---Problems/Introductory Problems/Permutations",
+      "program": "c:/Users/NICOLAS/Desktop/2024/RL projects/CSES---Problems/Introductory Problems/Permutations/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
