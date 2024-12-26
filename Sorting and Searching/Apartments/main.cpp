@@ -30,14 +30,20 @@ int main() {
          
       auto i = size_t(0);
       for (size_t b = v.size() / 2; b >= 1; b /= 2) {
-         while (i + b < v.size() && v[i + b] < min) i += b;
+         while (true){
+            while (i + b < v.size() && v[i + b] !=-1 && v[i + b] < min) i += b;
+            
+            if (i < v.size() && v[i+1] < min && v[i + b] ==-1) i++;
+            else break;
+ 
+         }
       }
       if (i < v.size() && v[i] < min){
          i++;
       }
       if (i < v.size() && (v[i] >= min && v[i] <= max)) {
          cant++;
-         v.erase(v.begin() + i);
+         v[i] = -1;
       }
 
    }
