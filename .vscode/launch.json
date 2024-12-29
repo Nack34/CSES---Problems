@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Apartments",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Apartments/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Ferris Wheel",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Ferris Wheel/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
