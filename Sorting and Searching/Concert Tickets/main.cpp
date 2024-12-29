@@ -7,16 +7,15 @@ int main() {
    long long n, x, p, max_p;
    cin >> n >> x;
    
-   vector<long long> prices;
+   multiset<long long> prices;
    while (cin >> p){
-      prices.push_back(p);
+      prices.insert(p);
       if (cin.get(c) && c == '\n') break;
    }
-   sort(prices.begin(),prices.end());
    
    while (cin >> max_p){
       
-      auto it = upper_bound(prices.begin(), prices.end(), max_p);
+      auto it = prices.upper_bound(max_p);
 
       if(it == prices.begin()) {
          cout << -1 << "\n";
