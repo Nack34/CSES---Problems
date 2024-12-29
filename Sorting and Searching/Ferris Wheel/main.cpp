@@ -1,53 +1,55 @@
 #include <bits/stdc++.h>
- 
+
 using namespace std;
- 
+
 int main() {
    char c;
    long long n, x, p;
    cin >> n >> x;
    long long res = 0;
    
-   unordered_map<long long, long long> cant_pesos;
-   long long max_peso = 0;
-   while (cin >> p){
-      max_peso = p>max_peso ? p : max_peso;
+   map<long long, long long, greater<long long>> cant_pesos;
+
+   while (cin >> p) {
       cant_pesos[p]++;
       if (cin.get(c) && c == '\n') break;
    }
- 
-   for (long long i=max_peso; i>0; i--){
-      if (cant_pesos[i] != 0){
-         if (i < x){
-            long long j = x-i <= i ? x-i : i;
-            if (j == i && i+j<=x){
-               res+=cant_pesos[i]/2;
-               cant_pesos[i]=cant_pesos[i]%2;
-               j--;
+
+   for (auto it = cant_pesos.begin(); it != cant_pesos.end(); ++it) {
+      long long peso = it->first;
+
+      if (it->second > 0) {
+         if (peso < x) {
+            long long complement = x - peso < peso ? x - peso : peso;
+            auto jt = cant_pesos.find(complement);
+            if (jt == cant_pesos.end()) {
+               cant_pesos[complement]=0;
+               jt = cant_pesos.find(complement);
             }
             
-            while (j>0 && cant_pesos[i] != 0){
-               if (cant_pesos[j]>0){
-                  if (cant_pesos[j] > cant_pesos[i]){
-                     res+=cant_pesos[i];
-                     cant_pesos[j]-=cant_pesos[i];
-                     cant_pesos[i]=0;
-                  } else{
-                     res+=cant_pesos[j];
-                     cant_pesos[i]-=cant_pesos[j];
-                     cant_pesos[j]=0;
-                  }
-               }
-               j--;
+            if (jt->first == peso && jt->first+peso<=x){
+               res+=it->second/2;
+               it->second=it->second%2;
+               jt++;
             }
- 
+
+            while (jt != cant_pesos.end() && it->second !=0) {
+               if (jt->second>0){
+                  long long cant_pares_logrados = min(it->second, jt->second);
+                  res += cant_pares_logrados;
+                  it->second -= cant_pares_logrados;
+                  jt->second -= cant_pares_logrados;
+               }
+               jt++;
+            }
          }
-         res+=cant_pesos[i];
-         cant_pesos[i]=0;
+
+         res += it->second;
+         it->second = 0;
       }
    }
- 
+
    cout << res;
- 
+
    return 0;
 }
