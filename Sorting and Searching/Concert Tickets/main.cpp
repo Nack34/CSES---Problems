@@ -4,7 +4,7 @@ using namespace std;
  
 int main() {
    char c;
-   long long n, x, p, max_p, price_to_pay;
+   long long n, x, p, max_p;
    cin >> n >> x;
    
    vector<long long> prices;
@@ -15,18 +15,21 @@ int main() {
    sort(prices.begin(),prices.end());
    
    while (cin >> max_p){
-      price_to_pay = -1;
- 
-      long long pos_act = 0;
-      for (long long i=prices.size()/2; i >=1; i/=2){
-         while (pos_act + i < prices.size() && prices[pos_act + i] <= max_p) pos_act += i;
+      
+      auto it = upper_bound(prices.begin(), prices.end(), max_p);
+
+      if(it == prices.begin()) {
+         cout << -1 << "\n";
+      } else {
+         it--;
+         if(*it <= max_p) {
+            cout << *it << "\n";
+            prices.erase(it);
+         } else {
+            cout << -1 << "\n";
+         }
       }
-      if (pos_act < prices.size() && prices[pos_act] <= max_p){
-         price_to_pay = prices[pos_act];
-         prices.erase(prices.begin() + pos_act);
-      }
  
-      cout << price_to_pay << "\n";
       if (cin.get(c) && c == '\n') break;
    }
  
