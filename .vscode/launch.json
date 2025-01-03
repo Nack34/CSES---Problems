@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Restaurant Customers",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Sorting and Searching/Restaurant Customers/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Minimizing Coins",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Minimizing Coins/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
