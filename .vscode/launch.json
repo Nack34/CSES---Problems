@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Book Shop",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Book Shop/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Array Description",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Array Description/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
