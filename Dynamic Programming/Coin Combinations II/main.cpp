@@ -2,43 +2,38 @@
  
 using namespace std;
  
+
 int main() {
    char c;
-   long long n, x, v, cant;
+   long long n, x, v;
    cin >> n >> x;
 
-   set<long long> values;
-   vector<map<long long,long long>> cants(x+1);
-
+   vector<int> values;
+   vector<vector<int>> cants(n + 1, vector<int>(x + 1, 0));
+   
    while (cin >> v){
-      values.insert(v);
+      values.push_back(v);
       if (cin.get(c) && c == '\n') break;
    }
+   sort(values.begin(),values.end());
 
-   for (long long i=1; i<x+1; ++i){
-      auto it = values.upper_bound(i);
-      while(it != values.begin()) {
-         it--;
-         v = *it;
-         if (i-v == 0){
-            cants[i][v]=1;
-         } else if (i-v > 0){
-            auto siguiente = cants[i-v].upper_bound(v);
+   for (long long i = 0; i < n+1; ++i) {
+        cants[i][0] = 1; 
+    }
 
-            long long suma = accumulate(cants[i-v].begin(), siguiente, 0,[](long long acc, const pair<long long,long long>& p) {
-                                                      return (acc + p.second)% 1000000007;
-                                                   });
-            if (suma>0){
-               cants[i][v]=suma;
+    for (long long i = 1; i <= n; ++i) {
+        for (long long j = 1; j <= x; ++j) {
+            if (j - values[i - 1] >= 0) {   
+               cants[i][j] = cants[i][j - values[i - 1]];
+               cants[i][j] = cants[i][j]% 1000000007;
+
             }
-         }
-      }
-   }
-   
-   long long res = accumulate(cants[x].begin(), cants[x].end(), 0,[](int acc, const pair<int,int>& p) {
-                                             return acc + p.second;
-                                          });
-   cout << res;
+            cants[i][j] += cants[i - 1][j];  
+            cants[i][j] = cants[i][j]% 1000000007;
+        }
+    }
+
+   cout << cants[n][x];
 
    return 0;
 }
