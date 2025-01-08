@@ -6,38 +6,49 @@ int main() {
    char c;
    long long n, m, v;
    cin >> n >> m;
-   vector<long long> values(n,0);
+   vector<long long> values;
 
    for (long long i=0; i<n; ++i){
       cin >> v;
-      values[i]=v;
+      values.push_back(v); 
    }
-   long long cants=1;
-   for (long long i=1; i<n; ++i){
-      if (values[i] != 0) continue;
-      long long cant = 0;
-      
-      if (i-1 < 0 || i+1 > n) cant = 3;
-      else {
-         for (long long j=-1;j<2;++j){
-            long long posible_value = values[i-1]+j;
-            if (posible_value>m) continue;
-            if (posible_value-values[i+1] > 1 || posible_value-values[i+1] < -1 ) continue;
-            
-            cant++;
+
+   n = values.size();
+   vector<vector<long long>> cants(n+1,vector<long long>(m+1, 0));
+
+   for (long long i=1; i<m+1; ++i){
+      cants[0][i]=1;
+   }
+   for (long long i=1; i<n+1; ++i){
+      for (long long j=1; j<m+1; ++j){
+         if (values[i-1] != 0 && abs(values[i-1]-j)<=1){
+            //cout << "i: " << i << ", j: " << j << ", values[i-1]: " << values[i-1] << ", abs(values[i-1]-j): " << abs(values[i-1]-j) << "\n";
+            cants[i][j]=cants[i-1][values[i-1]];
+         } else if (values[i-1] == 0){
+            cants[i][j]=cants[i-1][j-1]+cants[i-1][j];
+            if (j+1 < m+1) {cants[i][j]+=cants[i-1][j+1];}
          }
+         cants[i][j]= cants[i][j]%1000000007;
       }
-      cout << cant << ' ';
-
-      cants*=cant;
-      cants = cants % 1000000007;
    }
-   
-   cout << cants;
+   long long res=0;
+   if (values[n-1] == 0){
+      for (long long i=0; i <cants[n-1].size(); ++i){
+         res=(res+cants[n-1][i])%1000000007;
+      }
+   } else {
+      res=*max_element(cants[n].begin(), cants[n].end());
+   }
 
+   cout << res;
+   
    /*cout << "\n";
+   cout << "LAST VALUE: " <<  values[n-1];
+   cout << "\n";
+   cout << n << " " << m;
+   cout << "\n";
    for (int i=0; i<n+1; ++i){
-      for (int j=0; j<x+1; ++j){
+      for (int j=0; j<m+1; ++j){
          cout << cants[i][j] << ' ';
          cout << " -----  ";
       }  
