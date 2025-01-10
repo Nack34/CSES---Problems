@@ -7,9 +7,7 @@ vector<int> pre;
 vector<int> len;
  
 int find(int x) { // find representative
-   int buscado = x;
    while (x != pre[x]) x = pre[x];
-   pre[buscado]=x;
    return x;
 }
  
@@ -33,7 +31,7 @@ int main() {
    pre.resize(n * m, 0);
    len.resize(n * m, 0);
  
-   for (int i = 0; i < n; i++) {
+   for (int i = 0; i < n*m; i++) {
       pre[i] = i;
       len[i] = 1;
    }
@@ -48,18 +46,44 @@ int main() {
  
    for (int i=0; i<n; ++i){
       for (int j=0; j<m; ++j){
-         if (map[i][j] && i+1<n && map[i+1][j]) unite((i%n)+j, ((i+1)%n)+j);
-         if (map[i][j] && j+1<m && map[i][j+1]) unite((i%n)+j, ((i)%n)+j+1);
+         if (map[i][j] && i+1<n && map[i+1][j]) unite((i*m)+j, ((i+1)*m)+j);
+         if (map[i][j] && j+1<m && map[i][j+1]) unite((i*m)+j, ((i)*m)+j+1);
       }
    }
  
    set<int> distincts_sets;
  
-   for (int i = 0; i <= n; i++){
-      distincts_sets.insert(find(i));
+   
+   cout << "\n";
+   for (int i=0; i<n; ++i){
+      for (int j=0; j<m; ++j){
+         if (map[i][j]) distincts_sets.insert(find((i*m)+j));
+      }
    }
  
    cout << distincts_sets.size();
+   
+   /*cout << "\n";
+   for (auto e:distincts_sets){
+         cout << e << ' ';
+   }
+   cout << "\n";*/
+
+   /*cout << "\n";
+   for (int i = 0; i < n*m; i++) {
+      cout << "Elemento: " << i << ", previo: " << pre[i] << ", longitud del conjunto " << len[i] << ", find: " << find(i);
+      cout << "\n";
+   }*/
+   
+   
+   /*cout << "\n";
+   for (int i=0; i<n; ++i){
+      for (int j=0; j<m; ++j){
+         cout << find((i*m)+j) << ' ';
+      }
+      cout << "\n";
+   }*/
+   
    
    return 0;
 }
