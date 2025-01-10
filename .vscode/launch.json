@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Array Description",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Dynamic Programming/Array Description/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Counting Rooms",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Counting Rooms/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
