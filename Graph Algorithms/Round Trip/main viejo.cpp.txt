@@ -48,9 +48,11 @@ int main() {
                 }
 
                 cout << cant << "\n";
-                for (int k = camino.size() - 1; k >= 0; --k) {
-                        cout << camino[k] << ' ';
+                for (int k = ciclo.size() - 1; k >= 0; --k) {
+                        cout << ciclo[k] << ' ';
                 }
+                cout << v+1 << ' ';
+                cout << "\n";
                return 0;
 
             }
