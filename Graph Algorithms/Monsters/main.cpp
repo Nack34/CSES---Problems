@@ -27,42 +27,35 @@ int main() {
    
    queue<tuple<int, int, int>> q;
    vector<vector<bool>> visited;
+   visited = vector<vector<bool>>(n, vector<bool>(m, false));
 
    for (auto mon:monsters){
       auto [i,j] = mon;
-      min_monster_distance[i][j]=0;
+      q.push({i, j, 0});
+      visited[i][j] = true;
    }
 
-   for (auto mon:monsters){
-      auto [i,j] = mon;
-      int current_distance = 0;
-      visited = vector<vector<bool>>(n, vector<bool>(m, false));
+   while (!q.empty()) {
+      auto[i,j,current_distance] = q.front(); q.pop();
+      min_monster_distance[i][j] = min(current_distance,min_monster_distance[i][j]);
+      ++current_distance;
 
-      visited[i][j] = true;
-      q.push({i, j, current_distance});
-      while (!q.empty()) {
-         tie(i,j,current_distance) = q.front(); q.pop();
-         min_monster_distance[i][j] = min(current_distance,min_monster_distance[i][j]);
-         ++current_distance;
-
-         for (int k=-1; k<2; k+=2) {
-            if (i+k >= n || i+k<0) continue;
-            if (visited[i+k][j] || !map[i+k][j] || current_distance>=min_monster_distance[i+k][j] || (i==iA && j==jA)) continue;
-            visited[i+k][j] = true;
-            q.push({i+k, j, current_distance});
-         }
-         
-         for (int w=-1; w<2; w+=2) {
-            if (j+w >= m || j+w<0) continue;
-            if (visited[i][j+w] || !map[i][j+w] || current_distance>=min_monster_distance[i][j+w] || (i==iA && j==jA)) continue;
-            visited[i][j+w] = true;
-            q.push({i, j+w, current_distance});
-         }
-         
+      for (int k=-1; k<2; k+=2) {
+         if (i+k >= n || i+k<0) continue;
+         if (visited[i+k][j] || !map[i+k][j] || current_distance>=min_monster_distance[i+k][j] || (i==iA && j==jA)) continue;
+         visited[i+k][j] = true;
+         q.push({i+k, j, current_distance});
+      }
+      
+      for (int w=-1; w<2; w+=2) {
+         if (j+w >= m || j+w<0) continue;
+         if (visited[i][j+w] || !map[i][j+w] || current_distance>=min_monster_distance[i][j+w] || (i==iA && j==jA)) continue;
+         visited[i][j+w] = true;
+         q.push({i, j+w, current_distance});
       }
       
    }
-
+      
    /*cout << "\n";
    for (int i=0; i<n; ++i){
       for (int j=0; j<m; ++j){
@@ -82,13 +75,10 @@ int main() {
 
    visited = vector<vector<bool>>(n, vector<bool>(m, false));
    vector<vector<string>> direction(n, vector<string>(m, "#"));
-   int i = iA;
-   int j = jA;
-   int distance = 0;
-   visited[i][j] = true;
-   q.push({i, j, distance});
+   visited[iA][jA] = true;
+   q.push({iA, jA, 0});
    while (!q.empty()) {
-      tie(i,j, distance) = q.front(); q.pop();
+      auto[i, j, distance] = q.front(); q.pop();
       
       for (auto e:exits){
          auto [iE,jE] = e;
