@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Round Trip",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Round Trip/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Monsters",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms/Monsters/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
