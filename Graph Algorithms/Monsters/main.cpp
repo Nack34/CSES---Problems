@@ -48,6 +48,10 @@ int main() {
 
    while (!q.empty()) {
       auto[i,j,current_distance] = q.front(); q.pop();
+      //cout << "Monters path :\n";
+      //cout << i << ' ' << j << ' '  << current_distance;
+      //cout << "\n";
+
       min_monster_distance[i][j] = min(current_distance,min_monster_distance[i][j]);
       ++current_distance;
 
@@ -90,6 +94,9 @@ int main() {
    q.push({iA, jA, 0});
    while (!q.empty()) {
       auto[i, j, distance] = q.front(); q.pop();
+      //cout << "Hero path :\n";
+      //cout << i << ' ' << j << ' ' << distance;
+      //cout << "\n";
       
       for (auto e:exits){
          auto [iE,jE] = e;
