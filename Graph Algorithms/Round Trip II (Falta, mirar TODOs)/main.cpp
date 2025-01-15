@@ -6,11 +6,9 @@ int main() {
    int n, m, a, b;
    cin >> n >> m;
 
-   stack<tuple<int,int,int>> s;  // Usamos una pila en lugar de una cola para DFS
-   vector<bool> visited(n, false);
-   vector<int> visitados;
+   stack<tuple<int,int>> s;  // Usamos una pila en lugar de una cola para DFS
+   vector<int> state(n,0);
    vector<int> anterior(n, -1);
-   vector<int> n_steps(n, -1);
 
    vector<vector<int>> vecinos(n);
    for (int i=0; i<m; ++i){
@@ -20,26 +18,22 @@ int main() {
    }
 
    for (int i=0; i<n;++i){
-      if (visited[i]) continue;
+      if (state[i]!=0) continue;
       
-      s.push({i,-1, 0});
+      s.push({i,-1});
       while (!s.empty()) {
-         auto [j,w,n_step] = s.top(); s.pop();
-         if (visited[j]) continue;
+         auto [j,w] = s.top(); s.pop();
+         if (state[j]!=0) continue;
 
-         //cout << "Nodo actual: " << j+1 << "\n";
-         visited[j] = true;
-         visitados.push_back(j);
-         n_steps[j] = n_step+1;
+         cout << "Nodo actual: " << j+1 << "\n";
+         state[j]=1;
          anterior[j]=w;
 
          for (auto v:vecinos[j]) {
-                //cout << "vecino " << v+1 <<" \n";
-            if (visited[v] && n_steps[j]-n_steps[v]>=1/*2*/) { 
-               //TODO: Fix Test 17: el problema es que el grafo es dirigido, entonces marco 1 como visitado y le pongo el n_step, y despues cuando llego a 3, me fijo "el vecino 1 esta visitado y tiene un nstep con diferencia? -> SI" y ahi esta el error
-               //TODO: Fix Test 15: seguramente es lo mismo que el test 17 
+               cout << "vecino " << v+1 <<" \n";
+            if (state[v]==1) { 
 
-                //cout << "aceptado " << v+1 <<" \n";
+                cout << "aceptado " << v+1 <<" \n";
                 anterior[v] = j;
                 vector<int> camino;
                 camino.push_back(v+1);
@@ -60,7 +54,10 @@ int main() {
                return 0;
 
             }
-            s.push({v,j,n_steps[j]}); 
+            s.push({v,j}); 
+         }
+         for (int i=0; i<n;++i){
+            if (state[i] == 1) state[i] = 2;
          }
       }
    }
