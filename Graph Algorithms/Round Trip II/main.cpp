@@ -19,20 +19,18 @@ int main() {
 
    for (int i=0; i<n;++i){
       if (state[i]!=0) continue;
+      //cout << "Arranco por el nodo: " << i+1 << "\n";
       
       s.push({i,-1});
       while (!s.empty()) {
-         auto [j,w] = s.top(); s.pop();
-         if (state[j]!=0) continue;
-
+         auto [j,w] = s.top();
          //cout << "Nodo actual: " << j+1 << "\n";
          state[j]=1;
          anterior[j]=w;
-
+         bool vecinos_procesados = true;
          for (auto v:vecinos[j]) {
                //cout << "vecino " << v+1 <<" \n";
-            if (state[v]==1) { 
-
+            if (state[v]==1) {
                 //cout << "aceptado " << v+1 <<" \n";
                 anterior[v] = j;
                 vector<int> camino;
@@ -53,12 +51,17 @@ int main() {
                 }
                return 0;
 
+            } else if (state[v]==0){
+               s.push({v,j}); 
+               vecinos_procesados=false;
             }
-            s.push({v,j}); 
          }
-      }
-      for (int i=0; i<n;++i){
-         if (state[i] == 1) state[i] = 2;
+         if (vecinos_procesados){
+            s.pop();
+            state[j] = 2;
+            //cout << "Elimino: " << j+1 << "\n";
+
+         }
       }
    }
    
