@@ -25,15 +25,15 @@ int main() {
          auto [j,w] = s.top(); s.pop();
          if (state[j]!=0) continue;
 
-         cout << "Nodo actual: " << j+1 << "\n";
+         //cout << "Nodo actual: " << j+1 << "\n";
          state[j]=1;
          anterior[j]=w;
 
          for (auto v:vecinos[j]) {
-               cout << "vecino " << v+1 <<" \n";
+               //cout << "vecino " << v+1 <<" \n";
             if (state[v]==1) { 
 
-                cout << "aceptado " << v+1 <<" \n";
+                //cout << "aceptado " << v+1 <<" \n";
                 anterior[v] = j;
                 vector<int> camino;
                 camino.push_back(v+1);
@@ -56,9 +56,9 @@ int main() {
             }
             s.push({v,j}); 
          }
-         for (int i=0; i<n;++i){
-            if (state[i] == 1) state[i] = 2;
-         }
+      }
+      for (int i=0; i<n;++i){
+         if (state[i] == 1) state[i] = 2;
       }
    }
    
