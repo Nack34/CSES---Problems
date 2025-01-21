@@ -2,7 +2,7 @@
  
 using namespace std;
 
-tuple<long long, deque<int>> min_augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
+tuple<long long, deque<int>> min_augmentation_path(vector<vector<long long>>& adj, int s, int t, int n){  
    int a;
    long long cur_c_max;
    bool terminated = false;
@@ -20,7 +20,8 @@ tuple<long long, deque<int>> min_augmentation_path(unordered_map<int, unordered_
       }
       //cout << "current a: "<< a+1 << ", cur_c_max: " << cur_c_max << "\n";
 
-      for (const auto& [b, cr]:adj[a]){ // destino, capacidad restante
+      for (int b = 0; b < adj[a].size(); b++){ // b = destino
+         long long cr = adj[a][b]; // cr = capacidad restante
          //cout << "vecino: "<< b+1 << ", cr: " << cr << "\n";
          if (!visited[b] && cr>0){
             //cout << "anotando vecino "<< b+1 << "\n";
@@ -55,7 +56,7 @@ int main() {
    int s = 0;
    int t = n-1;
 
-   unordered_map<int, unordered_map<int, long long>> adj; // origen -> (destino -> capacidad restante)
+   vector<vector<long long>> adj(n, vector<long long>(n, 0)); // origen -> (destino -> capacidad restante)
 
    for (int _=0; _<m;++_){
       cin >> a >> b >> c;
