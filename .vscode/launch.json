@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms - Flows and cuts/Download Speed",
-      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms - Flows and cuts/Download Speed/build/Debug/outDebug",
+      "cwd": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms - Flows and cuts/Police Chase",
+      "program": "c:/Users/NICOLAS/Desktop/2024/CSES---Problems/Graph Algorithms - Flows and cuts/Police Chase/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

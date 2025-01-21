@@ -4,7 +4,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-tuple<long long, deque<int>> augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
+tuple<long long, deque<int>> dfs_augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
    int a, p;
    long long cur_c_max;
    bool terminated = false;
@@ -53,7 +53,7 @@ tuple<long long, deque<int>> augmentation_path(unordered_map<int, unordered_map<
    return {c_max, path}; 
 }
 
-tuple<long long, deque<int>> min_augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
+tuple<long long, deque<int>> bfs_augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
    int a;
    long long cur_c_max;
    bool terminated = false;
@@ -135,7 +135,7 @@ int main() {
    long long flow = 0;
    long long c_max;
    deque<int> path;
-   tie(c_max, path) = augmentation_path(adj, s, t, n);
+   tie(c_max, path) = dfs_augmentation_path(adj, s, t, n);
    while (c_max!=-1 && path.size() != 0){
       /*cout << "path:  ";
 
@@ -152,7 +152,7 @@ int main() {
       //cin >> pausar;
 
 
-      tie(c_max, path) = augmentation_path(adj, s, t, n);
+      tie(c_max, path) = dfs_augmentation_path(adj, s, t, n);
    }
    cout << flow;
    auto end = high_resolution_clock::now();    // Marca el final
