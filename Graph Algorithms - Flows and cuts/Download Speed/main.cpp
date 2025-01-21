@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
  
 using namespace std;
+using namespace std::chrono;
 
-tuple<long long, deque<int>> min_augmentation_path(vector<vector<long long>>& adj, int s, int t, int n){  
+tuple<long long, deque<int>> min_augmentation_path(unordered_map<int, unordered_map<int, long long>>& adj, int s, int t, int n){  
    int a;
    long long cur_c_max;
    bool terminated = false;
@@ -20,8 +21,7 @@ tuple<long long, deque<int>> min_augmentation_path(vector<vector<long long>>& ad
       }
       //cout << "current a: "<< a+1 << ", cur_c_max: " << cur_c_max << "\n";
 
-      for (int b = 0; b < adj[a].size(); b++){ // b = destino
-         long long cr = adj[a][b]; // cr = capacidad restante
+      for (const auto& [b, cr]:adj[a]){ // destino, capacidad restante
          //cout << "vecino: "<< b+1 << ", cr: " << cr << "\n";
          if (!visited[b] && cr>0){
             //cout << "anotando vecino "<< b+1 << "\n";
@@ -51,17 +51,28 @@ tuple<long long, deque<int>> min_augmentation_path(vector<vector<long long>>& ad
 }
   
 int main() {
+   auto start = high_resolution_clock::now();  // Marca el inicio
+
+   // Abrir archivo de entrada y salida
+   ifstream input("input.txt");  // Este archivo simula la entrada estándar (cin)
+   ofstream output("output.txt"); // Este archivo simula la salida estándar (cout)
+
+   // Redirigir cin y cout a los archivos
+   cin.rdbuf(input.rdbuf());
+   cout.rdbuf(output.rdbuf());
+
+
    int n, m, a, b, c;
    cin >> n >> m ;
    int s = 0;
    int t = n-1;
 
-   vector<vector<long long>> adj(n, vector<long long>(n, 0)); // origen -> (destino -> capacidad restante)
+   unordered_map<int, unordered_map<int, long long>> adj; // origen -> (destino -> capacidad restante)
 
    for (int _=0; _<m;++_){
       cin >> a >> b >> c;
       adj[a-1][b-1] += c;
-      adj[b-1][a-1] += 0;
+      //adj[b-1][a-1] += 0;
    }
 
    /*for (const auto& [a, inner]:adj){ // a = origen
@@ -86,14 +97,18 @@ int main() {
       /*cout << "current max: " << c_max << ", current flow: " << flow;
       cout << "\n";
       cout << "\n";
-      cout << "\n";
-      string pausar;
-      cin >> pausar;*/
+      cout << "\n";*/
+      //string pausar;
+      //cin >> pausar;
 
 
       tie(c_max, path) = min_augmentation_path(adj, s, t, n);
    }
    cout << flow;
+   auto end = high_resolution_clock::now();    // Marca el final
+   auto duration = duration_cast<milliseconds>(end - start);
+   cout << "\n";
+   cout << "Tiempo de ejecución: " << duration.count() << " ms (" << duration.count()/1000 << " s)" << endl;
    
    return 0;
 }
